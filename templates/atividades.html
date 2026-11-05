@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Atividades | Legado Paulo Freire{% endblock %}
+{% block content %}
+<section class="pagina-titulo"><h1>Atividades</h1><p>Organize atividades simples para aprender e praticar.</p></section>
+<section class="painel"><h2>Adicionar atividade</h2>
+<form method="post" class="formulario">
+<label for="titulo">Título da atividade *</label><input id="titulo" name="titulo" required maxlength="120" placeholder="Ex.: Forme a palavra">
+<label for="descricao">Descrição</label><textarea id="descricao" name="descricao" placeholder="Explique o que o aluno vai praticar"></textarea>
+<div class="duas-colunas"><div><label for="tipo">Tipo</label><select id="tipo" name="tipo"><option value="">Selecione</option><option>Leitura</option><option>Escrita</option><option>Reconhecimento</option><option>Outro</option></select></div>
+<div><label for="nivel">Nível</label><select id="nivel" name="nivel"><option value="">Selecione</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select></div></div>
+<button class="botao principal" type="submit">Cadastrar atividade</button>
+</form></section>
+<section class="cards atividades"><h2 class="titulo-lista">Atividades cadastradas</h2>
+{% for atividade in atividades %}<article class="card atividade-card"><span>✏️</span><h3>{{ atividade[1] }}</h3><p>{{ atividade[2] or 'Atividade para praticar leitura e escrita.' }}</p><small>{{ atividade[3] or 'Tipo não informado' }} · {{ atividade[4] or 'Todos os níveis' }}</small></article>
+{% else %}<p class="vazio">Nenhuma atividade cadastrada ainda.</p>{% endfor %}
+</section>
+{% endblock %}

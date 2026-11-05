@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Acompanhantes | Legado Paulo Freire{% endblock %}
+{% block content %}
+<section class="pagina-titulo"><h1>Acompanhantes</h1><p>Cadastre educadores e voluntários que acompanham os alunos.</p></section>
+<section class="painel"><h2>Adicionar acompanhante</h2>
+<form method="post" class="formulario">
+<label for="nome">Nome completo *</label><input id="nome" name="nome" required maxlength="120" placeholder="Nome do educador ou voluntário">
+<label for="telefone">Telefone</label><input id="telefone" name="telefone" type="tel" placeholder="(00) 00000-0000">
+<label for="email">E-mail</label><input id="email" name="email" type="email" placeholder="nome@email.com">
+<label for="instituto">Instituto</label><input id="instituto" name="instituto" placeholder="Nome do instituto">
+<label for="funcao">Função</label><select id="funcao" name="funcao"><option value="">Selecione a função</option><option>Educador(a)</option><option>Voluntário(a)</option><option>Coordenador(a)</option><option>Outro</option></select>
+<button class="botao principal" type="submit">Cadastrar acompanhante</button>
+</form></section>
+<section class="lista"><h2>Acompanhantes cadastrados <span class="contador">{{ acompanhantes|length }}</span></h2>
+{% for pessoa in acompanhantes %}<article class="item"><h3>{{ pessoa[1] }}</h3><p><strong>Função:</strong> {{ pessoa[5] or 'Não informada' }}</p><p><strong>Telefone:</strong> {{ pessoa[2] or 'Não informado' }} · <strong>E-mail:</strong> {{ pessoa[3] or 'Não informado' }}</p><p><strong>Instituto:</strong> {{ pessoa[4] or 'Não informado' }}</p></article>
+{% else %}<p class="vazio">Ainda não há acompanhantes cadastrados.</p>{% endfor %}
+</section>
+{% endblock %}

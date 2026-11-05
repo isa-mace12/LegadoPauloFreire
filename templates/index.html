@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Início | Legado Paulo Freire{% endblock %}
+{% block content %}
+<section class="boas-vindas">
+  <div><span class="etiqueta">EDUCAÇÃO • INCLUSÃO • OPORTUNIDADE</span>
+    <h1>Educação que transforma vidas.</h1>
+    <p>Uma iniciativa dedicada à alfabetização de jovens e adultos, com acompanhamento próximo e atividades que respeitam o ritmo de cada pessoa.</p>
+    <p>Gerencie alunos, organize aulas e acompanhe a evolução do processo de aprendizagem em um só lugar.</p>
+    <a class="botao principal" href="{{ url_for('atividade') }}">Conhecer atividades</a>
+  </div><div class="ilustracao" aria-hidden="true">LPF</div>
+</section>
+<section class="secao-titulo"><h2>Gestão do projeto</h2><p>Acesse as áreas do sistema e mantenha as informações organizadas.</p></section>
+<section class="cards">
+  <a class="card" href="{{ url_for('aluno') }}"><span>01</span><h3>Alunos</h3><p>Cadastre e consulte os estudantes.</p><b>{{ totais.alunos }} cadastrado(s) →</b></a>
+  <a class="card" href="{{ url_for('acompanhante') }}"><span>02</span><h3>Acompanhantes</h3><p>Organize os educadores e voluntários.</p><b>{{ totais.acompanhantes }} cadastrado(s) →</b></a>
+  <a class="card" href="{{ url_for('aulas') }}"><span>03</span><h3>Aulas</h3><p>Registre aulas e conteúdos trabalhados.</p><b>{{ totais.aulas }} registrada(s) →</b></a>
+  <a class="card" href="{{ url_for('atividade') }}"><span>04</span><h3>Atividades</h3><p>Organize exercícios de leitura e escrita.</p><b>{{ totais.atividades }} atividade(s) →</b></a>
+  <a class="card" href="{{ url_for('progresso') }}"><span>05</span><h3>Progresso</h3><p>Acompanhe os resultados dos alunos.</p><b>Ver registros →</b></a>
+</section>
+{% endblock %}

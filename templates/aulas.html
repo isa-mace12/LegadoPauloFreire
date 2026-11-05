@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Aulas | Legado Paulo Freire{% endblock %}
+{% block content %}
+<section class="pagina-titulo"><h1>Aulas</h1><p>Registre as aulas realizadas e os conteúdos trabalhados.</p></section>
+<section class="painel"><h2>Registrar aula</h2>
+{% if not alunos or not acompanhantes %}<p class="aviso-inline">Para registrar uma aula, cadastre pelo menos um aluno e um acompanhante primeiro.</p>{% endif %}
+<form method="post" class="formulario">
+<label for="aluno_id">Aluno *</label><select id="aluno_id" name="aluno_id" required><option value="">Selecione o aluno</option>{% for aluno in alunos %}<option value="{{ aluno[0] }}">{{ aluno[1] }}</option>{% endfor %}</select>
+<label for="acompanhante_id">Acompanhante *</label><select id="acompanhante_id" name="acompanhante_id" required><option value="">Selecione o acompanhante</option>{% for pessoa in acompanhantes %}<option value="{{ pessoa[0] }}">{{ pessoa[1] }}</option>{% endfor %}</select>
+<label for="data_aula">Data da aula *</label><input id="data_aula" name="data_aula" type="date" value="{{ hoje }}" required>
+<label for="tema">Tema da aula *</label><input id="tema" name="tema" required maxlength="120" placeholder="Ex.: Vogais">
+<label for="observacao">Observação</label><textarea id="observacao" name="observacao" placeholder="Escreva uma observação sobre a aula"></textarea>
+<button class="botao principal" type="submit" {% if not alunos or not acompanhantes %}disabled{% endif %}>Registrar aula</button>
+</form></section>
+<section class="lista"><h2>Aulas registradas <span class="contador">{{ aulas|length }}</span></h2>
+{% for aula in aulas %}<article class="item"><h3>{{ aula[4] }}</h3><p><strong>Aluno:</strong> {{ aula[1] }} · <strong>Acompanhante:</strong> {{ aula[2] }}</p><p><strong>Data:</strong> {{ aula[3].strftime('%d/%m/%Y') }}</p>{% if aula[5] %}<p>{{ aula[5] }}</p>{% endif %}</article>
+{% else %}<p class="vazio">Nenhuma aula registrada até agora.</p>{% endfor %}
+</section>
+{% endblock %}

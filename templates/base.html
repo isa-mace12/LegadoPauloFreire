@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Legado Paulo Freire{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header class="cabecalho">
+  <a class="marca" href="{{ url_for('inicio') }}"><span class="logo">LPF</span><span><strong>Legado Paulo Freire</strong><small>Aprender é um direito de todos</small></span></a>
+</header>
+<nav class="menu" aria-label="Menu principal">
+  <a href="{{ url_for('inicio') }}">Início</a>
+  <a href="{{ url_for('aluno') }}">Alunos</a>
+  <a href="{{ url_for('acompanhante') }}">Acompanhantes</a>
+  <a href="{{ url_for('aulas') }}">Aulas</a>
+  <a href="{{ url_for('atividade') }}">Atividades</a>
+  <a href="{{ url_for('progresso') }}">Progresso</a>
+</nav>
+{% with mensagens = get_flashed_messages(with_categories=true) %}
+  {% if mensagens %}
+  <div class="mensagens" role="status">
+    {% for categoria, mensagem in mensagens %}
+      <p class="mensagem {{ categoria }}">{{ mensagem }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+<main>{% block content %}{% endblock %}</main>
+<footer><strong>Legado Paulo Freire</strong><p>Educação, inclusão e oportunidade para todos.</p><small>© 2026 Legado Paulo Freire</small></footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Progresso | Legado Paulo Freire{% endblock %}
+{% block content %}
+<section class="pagina-titulo"><h1>Progresso</h1><p>Registre e acompanhe o desenvolvimento de cada aluno.</p></section>
+<section class="painel"><h2>Registrar progresso</h2>
+{% if not alunos or not atividades %}<p class="aviso-inline">Cadastre pelo menos um aluno e uma atividade antes de registrar o progresso.</p>{% endif %}
+<form method="post" class="formulario">
+<label for="aluno_id">Aluno *</label><select id="aluno_id" name="aluno_id" required><option value="">Selecione o aluno</option>{% for aluno in alunos %}<option value="{{ aluno[0] }}">{{ aluno[1] }}</option>{% endfor %}</select>
+<label for="atividade_id">Atividade *</label><select id="atividade_id" name="atividade_id" required><option value="">Selecione a atividade</option>{% for atividade in atividades %}<option value="{{ atividade[0] }}">{{ atividade[1] }}</option>{% endfor %}</select>
+<label for="data_registro">Data *</label><input id="data_registro" name="data_registro" type="date" value="{{ hoje }}" required>
+<label for="resultado">Resultado *</label><select id="resultado" name="resultado" required><option value="">Selecione o resultado</option><option>Concluído</option><option>Em andamento</option><option>Precisa praticar</option></select>
+<label for="observacao">Observação</label><textarea id="observacao" name="observacao" placeholder="Anote como foi o desempenho do aluno"></textarea>
+<button class="botao principal" type="submit" {% if not alunos or not atividades %}disabled{% endif %}>Salvar progresso</button>
+</form></section>
+<section class="lista"><h2>Registros de progresso <span class="contador">{{ progressos|length }}</span></h2>
+{% for registro in progressos %}<article class="item"><h3>{{ registro[1] }}</h3><p><strong>Atividade:</strong> {{ registro[2] }} · <strong>Data:</strong> {{ registro[3].strftime('%d/%m/%Y') }}</p><p><strong>Resultado:</strong> <span class="resultado">{{ registro[4] }}</span></p>{% if registro[5] %}<p>{{ registro[5] }}</p>{% endif %}</article>
+{% else %}<p class="vazio">Nenhum progresso registrado ainda.</p>{% endfor %}
+</section>
+{% endblock %}
